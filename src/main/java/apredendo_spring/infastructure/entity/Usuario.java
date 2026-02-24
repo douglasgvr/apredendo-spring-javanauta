@@ -33,5 +33,4 @@ public class Usuario {
     @JoinColumn(name = "usuario_id", referencedColumnName = "id")
     private List<Telefone> telefone;
 
-
 }

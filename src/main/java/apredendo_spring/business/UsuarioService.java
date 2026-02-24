@@ -10,12 +10,12 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class UsuarioService {
 
-    private final UsuarioRepository usuaropRepository;
+    private final UsuarioRepository usuarioRepository;
 
     public Usuario salvaUsuario(Usuario usuario) {
         try{
             emailExiste(usuario.getEmail());
-            return usuaropRepository.save(usuario);
+            return usuarioRepository.save(usuario);
         } catch (ConflictException e) {
             throw new ConflictException("Email já cadastrado", e.getCause());
         }
@@ -23,8 +23,8 @@ public class UsuarioService {
 
     public void emailExiste(String email) {
         try{
-            boolean existe = usuaropRepository.existsByEmail(email);
-            if(!existe){
+            boolean existe = usuarioRepository.existsByEmail(email);
+            if(existe){
                 throw new ConflictException("Email já cadastrado" + email);
             }
         } catch (ConflictException e) {
@@ -33,7 +33,7 @@ public class UsuarioService {
     }
 
     public boolean verificarEmailExistente(String email) {
-        return usuaropRepository.existsByEmail(email);
+        return usuarioRepository.existsByEmail(email);
     }
 
 }

@@ -10,8 +10,6 @@ public class ApredendoSpringApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(ApredendoSpringApplication.class, args);
 
-		Usuario douglas = new Usuario("Douglas", "douglas@email.com", "123456");
-		System.out.println("Douglas email: " + douglas.getEmail());
 	}
 
 }

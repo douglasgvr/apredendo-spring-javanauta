@@ -2,6 +2,7 @@ package apredendo_spring.business;
 
 import apredendo_spring.infastructure.entity.Usuario;
 import apredendo_spring.infastructure.exceptions.ConflictException;
+import apredendo_spring.infastructure.exceptions.ResourceNotFoundException;
 import apredendo_spring.infastructure.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -37,6 +38,15 @@ public class UsuarioService {
 
     public boolean verificarEmailExistente(String email) {
         return usuarioRepository.existsByEmail(email);
+    }
+
+    public Usuario buscaUsuarioPorEmail(String email) {
+        return usuarioRepository.findByEmail(email)
+                .orElseThrow(() -> new ResourceNotFoundException("Email não encontrado" + email));
+    }
+
+    public void deletarUsuarioPorEmail(String email) {
+        usuarioRepository.deleteByEmail(email);
     }
 
 }
